@@ -4,6 +4,7 @@ const express       = require("express");
 const app           = express();
 const port          = 4000;
 const passport      = require("passport");
+const passportSetup = require("./config/passport");
 const authRoutes    = require("./routes/authRoutes");
 const keys          = require("./config/keys");
 const cors          = require("cors");
