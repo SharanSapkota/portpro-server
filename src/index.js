@@ -1,20 +1,14 @@
 
 const cookieSession = require("cookie-session");
-const express = require("express");
-const app = express();
-const port = 4000;
-const passport = require("passport");
-const passportSetup = require("./config/passport");
-const session = require("express-session");
-const authRoutes = require("./routes/authRoutes");
-const mongoose = require("mongoose");
-const keys = require("./config/keys");
-const cors = require("cors");
-const cookieParser = require("cookie-parser"); // parse cookie header
-
-mongoose.connect(keys.MONGODB_URI, () => {
-    console.log("connected to mongo db");
-});
+const express       = require("express");
+const app           = express();
+const port          = 4000;
+const passport      = require("passport");
+const authRoutes    = require("./routes/authRoutes");
+const keys          = require("./config/keys");
+const cors          = require("cors");
+const cookieParser  = require("cookie-parser");
+const connectToMongoDb = require("./config/db");
 
 app.use(
     cookieSession({
@@ -58,6 +52,8 @@ app.get("/", authCheck, (req, res) => {
         cookies: req.cookies
     });
 });
+
+connectToMongoDb();
 
 // connect react to nodejs express server
 app.listen(port, () => console.log(`Server is running on port ${port}!`));
