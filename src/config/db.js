@@ -1,10 +1,10 @@
 const mongoose = require('mongoose');
-require('dotenv').config();
+const KEYS = require('./keys.example');
 
-const connectToMongoDb = () =>{
+const connectToMongoDb = () => {
     try{
         mongoose.connect(
-            process.env.MONGO_URI,
+            KEYS.MONGODB_URI,
             {
                 useNewUrlParser: true,
                 useCreateIndex: true,
