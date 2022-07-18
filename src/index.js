@@ -2,7 +2,6 @@
 const cookieSession     = require("cookie-session");
 const express           = require("express");
 const app               = express();
-const port              = 4000;
 const passport          = require("passport");
 const passportSetup     = require("./config/passport");
 const authRoutes        = require("./routes/authRoutes");
@@ -11,6 +10,8 @@ const cors              = require("cors");
 const cookieParser      = require("cookie-parser");
 const connectToMongoDb  = require("./config/db");
 const authCheck         = require("./middleware/authCheck");
+require('dotenv').config({ path: '../.env' }); 
+
 
 app.use(
     cookieSession({
@@ -43,6 +44,7 @@ app.get("/", authCheck, (req, res) => {
     });
 });
 
+const port = process.env.PORT || 4100;
 connectToMongoDb();
 
 app.listen(port, () => console.log(`Server is running on port ${port}!`));
