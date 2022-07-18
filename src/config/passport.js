@@ -23,7 +23,7 @@ passport.use(
         {
             consumerKey: keys.TWITTER_CONSUMER_KEY,
             consumerSecret: keys.TWITTER_CONSUMER_SECRET,
-            callbackURL: "http://localhost:4000/auth/twitter/redirect"
+            callbackURL: keys.CALLBACKURL
         },
         async (token, tokenSecret, profile, done) => {
             const currentUser = await User.findOne({
