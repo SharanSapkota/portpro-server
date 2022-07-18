@@ -1,6 +1,9 @@
-const router                                = require("express").Router();
-const passport                              = require("passport");
-const { authenticate, failedLogin, logout } = require("../controllers/twitter");
+const router            = require("express").Router();
+const passport          = require("passport");
+const { 
+    authenticate,
+    failedLogin,
+    logout }            = require("../controllers/authController");
 
 const CLIENT_HOME_PAGE_URL = "http://localhost:3000";
 

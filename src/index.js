@@ -1,15 +1,16 @@
 
-const cookieSession = require("cookie-session");
-const express       = require("express");
-const app           = express();
-const port          = 4000;
-const passport      = require("passport");
-const passportSetup = require("./config/passport");
-const authRoutes    = require("./routes/authRoutes");
-const keys          = require("./config/keys");
-const cors          = require("cors");
-const cookieParser  = require("cookie-parser");
-const connectToMongoDb = require("./config/db");
+const cookieSession     = require("cookie-session");
+const express           = require("express");
+const app               = express();
+const port              = 4000;
+const passport          = require("passport");
+const passportSetup     = require("./config/passport");
+const authRoutes        = require("./routes/authRoutes");
+const keys              = require("./config/keys");
+const cors              = require("cors");
+const cookieParser      = require("cookie-parser");
+const connectToMongoDb  = require("./config/db");
+const authCheck         = require("./middleware/authCheck");
 
 app.use(
     cookieSession({
@@ -31,19 +32,7 @@ app.use(cors({
 })
 );
 
-// set up routes
 app.use("/auth", authRoutes);
-
-const authCheck = (req, res, next) => {
-    if (!req.user) {
-        res.status(401).json({
-            authenticated: false,
-            message: "user has not been authenticated"
-        });
-    } else {
-        next();
-    }
-};
 
 app.get("/", authCheck, (req, res) => {
     res.status(200).json({
@@ -56,5 +45,4 @@ app.get("/", authCheck, (req, res) => {
 
 connectToMongoDb();
 
-// connect react to nodejs express server
 app.listen(port, () => console.log(`Server is running on port ${port}!`));

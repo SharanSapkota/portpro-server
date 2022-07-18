@@ -1,5 +1,5 @@
-const mongoose = require('mongoose');
-const KEYS = require('./keys.example');
+const mongoose  = require('mongoose');
+const KEYS      = require('./keys.example');
 
 const connectToMongoDb = () => {
     try{
