@@ -9,6 +9,8 @@ const MONGODB = {
     MONGODB_URI: `mown=majority`
 };
 
+const CALLBACKURL = "test";
+
 const SESSION = {
     COOKIE_KEY: "own"
 };
@@ -16,7 +18,8 @@ const SESSION = {
 const KEYS = {
     ...TWITTER_TOKENS,
     ...MONGODB,
-    ...SESSION
+    ...SESSION,
+    ...CALLBACKURL
 };
 
 module.exports = KEYS;
